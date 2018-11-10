@@ -23,7 +23,7 @@ root.title = "TiOS"
 
 # Wallpaper
 
-background_image = PhotoImage(file = "wallpaper.png")
+background_image = PhotoImage(file = "../images/wallpaper.png")
 background_label = Label(root, image = background_image)
 
 background_label.place(x = 0, y = 0, relwidth = 1, relheight = 1)
