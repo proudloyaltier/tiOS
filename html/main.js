@@ -161,6 +161,7 @@ function startTiri() {
 }
 
 function loadTiles() {
+  document.getElementById("tiles-container").innerHTML = "";
   for (var i = 0; i < tiles.length; i++) {
     let tile = document.createElement("div");
     let tileContent = document.createElement("div");
