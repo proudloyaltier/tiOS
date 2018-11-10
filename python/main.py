@@ -24,7 +24,7 @@ def openTile(tile):
 	frame = Frame(root, width = 1920, height = 1080, bg = "white")
 	label = Label(text = tile["title"])
   
-	frame.grid()
+	frame.grid(row = 0)
 	label.grid(padx = (10, 10), pady = (10, 10))
 
 def updateTiles():
