@@ -22,7 +22,7 @@ tiles = [{
 
 def openTile(tile):
 	tile_frame = Frame(root, bg = "white")
-	tile_title = Label(tile_frame, text = tile["title"], font = "Robot 24")
+	tile_title = Label(tile_frame, text = tile["title"], font = "Roboto 24")
 	tile_text = Label(tile_frame, text = tile["text"], font = "Roboto 14")
 	tile_back_button = Button(tile_frame, text = "Back")
 
@@ -42,7 +42,7 @@ def closeTile(frame, title, text, button):
 
 def updateTiles():
 	for tile in tiles:
-		tile_button = Button(root, text = tile["title"] + "\n\n" + tile["text"], font = "Roboto", width = 20, height=10, command = lambda: openTile(tile))
+		tile_button = Button(root, relief="flat" , text = tile["title"] + "\n\n" + tile["text"], font = "Roboto", width = 20, height=10, command = lambda: openTile(tile))
 		tile_button.pack(padx = (10, 10), pady = (10, 10))
 
 # Main
