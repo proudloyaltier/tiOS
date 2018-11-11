@@ -22,7 +22,7 @@ tiles = [{
 
 def openTile(tile):
 	tile_frame = Frame(root, bg = "white")
-	tile_title = Label(tile_frame, text = tile["title"], font = "Roboto 24")
+	tile_title = Label(tile_frame, text = tile["title"], font = "Robot 24")
 	tile_text = Label(tile_frame, text = tile["text"], font = "Roboto 14")
 	tile_back_button = Button(tile_frame, text = "Back")
 
@@ -30,9 +30,9 @@ def openTile(tile):
 
 	tile_frame.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 
-	tile_title.grid()
-	tile_text.grid()
-	tile_back_button.grid()
+	tile_title.pack()
+	tile_text.pack()
+	tile_back_button.pack()
 
 def closeTile(frame, title, text, button):
 	frame.destroy()
@@ -42,8 +42,8 @@ def closeTile(frame, title, text, button):
 
 def updateTiles():
 	for tile in tiles:
-		tile_button = Button(root, text = tile["title"] + "\n\n" + tile["text"], font = "Roboto", width = 50, height = 20, command = lambda: openTile(tile))
-		tile_button.grid(padx = (10, 10), pady = (10, 10))
+		tile_button = Button(root, text = tile["title"] + "\n\n" + tile["text"], font = "Roboto", width = 20, height=10, command = lambda: openTile(tile))
+		tile_button.pack(padx = (10, 10), pady = (10, 10))
 
 # Main
 
@@ -67,7 +67,7 @@ background_label.image = background_image
 # Time Label
 
 clock = Label(root, text = "?:??", font = "Roboto 24", anchor = "center")
-clock.grid(padx = (1, 1), pady = (1, 1))
+clock.pack(padx = (1, 1), pady = (1, 1))
 
 def tick():
 	current_time = time.strftime("%H:%M:%S")
