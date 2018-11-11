@@ -1,4 +1,4 @@
-# TiOS v0.0.5 Alpha
+# TiOS v0.0.6 Alpha
 
 import os
 import time
@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from tkinter import *
 
-version = "0.0.5 Alpha"
+version = "0.0.6 Alpha"
 
 # Variables
 
@@ -18,21 +18,23 @@ tiles = [{
 	"text": "Why not have two?"
 }]
 
+tiles_screen = []
+
 # Tile Functions
 
 def openTile(tile):
 	tile_frame = Frame(root, bg = "white")
-	tile_title = Label(tile_frame, text = tile["title"], font = "Roboto 24")
-	tile_text = Label(tile_frame, text = tile["text"], font = "Roboto 14")
-	tile_back_button = Button(tile_frame, text = "Back")
+	tile_title = Label(tile_frame, text = tile["title"], font = "Roboto 24", bg = "white")
+	tile_text = Label(tile_frame, text = tile["text"], font = "Roboto 14", bg = "white")
+	tile_back_button = Button(tile_frame, text = "Back", border = 0, font = "Roboto 12")
 
 	tile_back_button.configure(command = lambda: closeTile(tile_frame, tile_title, tile_text, tile_back_button))
 
 	tile_frame.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 
-	tile_title.pack()
-	tile_text.pack()
-	tile_back_button.pack()
+	tile_title.grid(padx = (25, 25), pady = (25, 25))
+	tile_text.grid(padx = (25, 25))
+	tile_back_button.grid()
 
 def closeTile(frame, title, text, button):
 	frame.destroy()
@@ -42,8 +44,9 @@ def closeTile(frame, title, text, button):
 
 def updateTiles():
 	for tile in tiles:
-		tile_button = Button(root, relief="flat" , text = tile["title"] + "\n\n" + tile["text"], font = "Roboto", width = 20, height=10, command = lambda: openTile(tile))
-		tile_button.pack(padx = (10, 10), pady = (10, 10))
+		tile_button = Button(root, text = tile["title"] + "\n\n" + tile["text"], width = 30, height = 10, border = 0, font = "Roboto 12", bg = "white", command = lambda: openTile(tile))
+
+		tile_button.pack(anchor = "w", padx = (10, 10), pady = (10, 10))
 
 # Main
 
@@ -51,7 +54,7 @@ print("Welcome to TiOS!\nVersion: " + version + "\n\nStarting GUI...")
 
 root = Tk()
 
-#root.configure(background = "white", cursor = "none")
+root.configure(background = "white")
 root.attributes("-fullscreen", True)
 
 root.title = "TiOS"
@@ -62,17 +65,15 @@ background_image = PhotoImage(file = "wallpaper.png")
 background_label = Label(root, image = background_image)
 
 background_label.place(x = 0, y = 0, relwidth = 1, relheight = 1)
-background_label.image = background_image
 
 # Time Label
 
-clock = Label(root, text = "?:??", font = "Roboto 24", anchor = "center")
-clock.pack(padx = (1, 1), pady = (1, 1))
+clock = Label(root, text = "?:??", font = "Roboto 54", bg = "white")
+
+clock.pack(pady = (25, 25))
 
 def tick():
-	current_time = time.strftime("%H:%M:%S")
-
-	clock.config(text = current_time)
+	clock.configure(text = time.strftime("%H:%M:%S"))
 	clock.after(1000, tick)
 
 tick()
