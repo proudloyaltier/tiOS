@@ -1,4 +1,4 @@
-# TiOS v0.0.4 Alpha
+# TiOS v0.0.5 Alpha
 
 import os
 import time
@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from tkinter import *
 
-version = "0.0.4 Alpha"
+version = "0.0.5 Alpha"
 
 # Variables
 
@@ -22,20 +22,20 @@ tiles = [{
 
 def openTile(tile):
 	tile_frame = Frame(root, bg = "white")
-	tile_label = Label(tile_frame, text = tile["title"], font = "Times 24")
+	tile_title = Label(tile_frame, text = tile["title"], font = "Times 24")
+	tile_text = Label(tile_frame, text = tile["text"], font = "Times 14")
 	tile_back_button = Button(tile_frame, text = "Back")
 
-	tile_back_button.configure(command = lambda: closeTile(tile_frame, tile_label, tile_back_button))
+	tile_back_button.configure(command = lambda: closeTile(tile_frame))
 
 	tile_frame.place(x = 0, y = 0, relwidth = 1, relheight = 1)
 
-	tile_label.grid()
+	tile_title.grid()
+	tile_text.grid()
 	tile_back_button.grid()
 
-def closeTile(frame, label, button):
-	root.grid_remove()
-	label.grid_remove()
-	button.grid_remove()
+def closeTile(frame):
+	root.grid_remove(frame)
 
 def updateTiles():
 	for tile in tiles:
