@@ -57,12 +57,13 @@ background_label.image = background_image
 
 # Time Label
 
-clock = Label(root, text = "Updating", anchor="center")
+clock = Label(root, text = "Updating", anchor = "center")
 clock.grid(padx = (1, 1), pady = (1, 1))
 
 def tick():
-    clock.config(text=time.strftime('%H:%M:%S'))
-    clock.after(1000, tick)
+	clock.config(text = time.strftime("%H:%M:%S"))
+	clock.after(1000, tick)
+
 tick()
 
 updateTiles()
