@@ -1,4 +1,4 @@
-# TiOS v0.0.6 Alpha
+#!/usr/bin/env python3
 
 import os
 import time
@@ -6,9 +6,11 @@ import time
 from datetime import datetime
 from tkinter import *
 
-version = "0.0.6 Alpha"
+import urllib.request
 
 # Variables
+
+version = "0.0.6"
 
 tiles = [{
 	"title": "Test Tile",
@@ -46,9 +48,30 @@ def updateTiles():
 
 		tile_button.pack(anchor = "w", padx = (10, 10), pady = (10, 10))
 
+# Updater
+
+update_request = urllib.request.urlopen("https://proudloyaltier.github.io/TiOS/latest.html")
+latest_version = update_request.read().decode("utf-8").replace("\n", "")
+
+print("Checking for updates...")
+
+if (version != latest_version):
+	print("Downloading latest version...")
+
+	download_request = urllib.request.urlopen("https://proudloyaltier.github.io/TiOS/main.py")
+	downloaded_code = download_request.read().decode("utf-8")
+
+	main_file = open(__file__, "w")
+
+	main_file.write(downloaded_code)
+
+	main_file.close()
+else:
+	print("TiOS is up to date!")
+
 # Main
 
-print("Welcome to TiOS!\nVersion: " + version + "\n\nStarting GUI...")
+print("\nWelcome to TiOS!\nVersion: " + version + "\n\nStarting GUI...")
 
 root = Tk()
 
@@ -59,7 +82,7 @@ root.title = "TiOS"
 
 # Wallpaper
 
-background_image = PhotoImage(file = "wallpaper.png")
+background_image = PhotoImage(file = "images/wallpapers/default.png")
 background_label = Label(root, image = background_image)
 
 background_label.place(x = 0, y = 0, relwidth = 1, relheight = 1)
