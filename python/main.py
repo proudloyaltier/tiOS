@@ -18,8 +18,6 @@ tiles = [{
 	"text": "Why not have two?"
 }]
 
-tiles_screen = []
-
 # Tile Functions
 
 def openTile(tile):
