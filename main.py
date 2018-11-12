@@ -45,7 +45,8 @@ def closeTile(frame, title, text, button):
 def updateTiles():
 	i = 0
 	while i < len(tiles):
-		Button(root, text = tiles[i]["title"] + "\n\n" + tiles[i]["text"], width = 30, height = 10, border = 0, font = "Roboto 12", bg = "white", command = lambda x=i: openTile(tiles[x])).pack(anchor = "w", padx = (10, 10), pady = (10, 10))
+		tiles_button = Button(root, text = tiles[i]["title"] + "\n\n" + tiles[i]["text"], width = 30, height = 10, border = 0, font = "Roboto 12", bg = "white", command = lambda x=i: openTile(tiles[x]))
+		tiles_button.pack(anchor = "w", padx = (10, 10), pady = (10, 10))
 		i += 1
 # Updater
 
