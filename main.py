@@ -10,7 +10,7 @@ import urllib.request
 
 # Variables
 
-version = "0.0.7"
+version = "0.0.8"
 
 tiles = [{
 	"title": "Test Tile",
@@ -43,11 +43,10 @@ def closeTile(frame, title, text, button):
 	button.destroy()
 
 def updateTiles():
-	for tile in tiles:
-		tile_button = Button(root, text = tile["title"] + "\n\n" + tile["text"], width = 30, height = 10, border = 0, font = "Roboto 12", bg = "white", command = lambda: openTile(tile))
-
-		tile_button.pack(anchor = "w", padx = (10, 10), pady = (10, 10))
-
+	i = 0
+	while i < len(tiles):
+		Button(root, text = tiles[i]["title"] + "\n\n" + tiles[i]["text"], width = 30, height = 10, border = 0, font = "Roboto 12", bg = "white", command = lambda x=i: openTile(tiles[x])).pack(anchor = "w", padx = (10, 10), pady = (10, 10))
+		i += 1
 # Updater
 
 update_request = urllib.request.urlopen("https://proudloyaltier.github.io/TiOS/latest.html")
