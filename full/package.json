@@ -1,0 +1,17 @@
+{
+  "name": "TiriHub",
+  "version": "1.0.0",
+  "description": "Tiri Hub OS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "fuck yeah",
+  "author": "TiMedia",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^2.0.2",
+    "node-cmd": "^3.0.0",
+    "python-shell": "^1.0.6"
+  }
+}
