@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "fuck yeah",
+  "repository": "https://github.com/proudloyaltier/TiOS/",
   "author": "TiMedia",
   "license": "CC0-1.0",
   "devDependencies": {
