@@ -7,6 +7,8 @@ Author: graphinghandheld, hymenopus
 
 // Elements
 
+const tiriScript = require("./runTiri")
+
 const stage1 = document.getElementById("stage-1");
 const stage1Button = document.getElementById("stage-1-button");
 
@@ -46,7 +48,7 @@ var lockPicture;
 // Functions
 
 document.getElementById("tiriBtn").onclick = function() {
-  require("./runTiri")
+  tiriScript.startListening();
 }
 
 function receiveTiri(whatToReceive) {
