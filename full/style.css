@@ -97,6 +97,14 @@ button.tile-back-button {
   text-align: center;
 }
 
+ #tiles-container {
+   margin-top: 10%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+
 #lockscreen, #home {
   background-repeat: no-repeat;
   background-position: center;
@@ -138,6 +146,7 @@ button.tile-back-button {
   box-shadow: 5px 1px 10px #444444;
   margin: 20px;
   cursor: pointer;
+  flex: 0 0 auto;
 }
 
 .tile:hover {

@@ -206,7 +206,7 @@ function loadTiles() {
     tile.appendChild(tileContent);
     tile.appendChild(backButton);
     
-    tilesContainer.appendChild(tile);
+    tilesContainer.prepend(tile);
   }
 }
 
