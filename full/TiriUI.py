@@ -11,7 +11,7 @@ CLIENT_KEY = "Vl56r8ewBSDhEdTfpFIWwuxhOqA01lF3aopxGH6aKOAEx9u8DMDpzsPFFed3M5-Qaa
 BUFFER_SIZE = 512
 hasConversationState = False
 
-exists = os.path.isfile('/home/pi/TiriLib/houndify_python3_sdk_1.1.0/TiPodAuth.txt')
+exists = os.path.isfile('TiPodAuth.txt')
 if exists:
     existFile = open("TiPodAuth.txt", "r")
     AUTHVAL = existFile.read()
@@ -59,7 +59,7 @@ client = houndify.StreamingHoundClient(CLIENT_ID, CLIENT_KEY, str(AUTHVAL))
 
 client.setLocation(37.388309, -121.973968)
 
-if os.path.isfile('/home/pi/TiriLib/houndify_python3_sdk_1.1.0/TiPodConversationState.txt'):
+if os.path.isfile('TiPodConversationState.txt'):
     conversationStateFile = open("TiPodConversationState.txt","r")
     client.setConversationState(eval(conversationStateFile.read()))
     conversationStateFile.close()
