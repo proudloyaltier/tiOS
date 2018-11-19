@@ -61,8 +61,6 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 
 let pyshell = new PythonShell('TiriUI.py');
-
-
 pyshell.on('message', function (message) {
-    mainWindow.webContents.executeJavaScript("receiveTiri(" + message + ")");
+    //mainWindow.webContents.executeJavaScript("receiveTiri(" + message + ")");
 });
