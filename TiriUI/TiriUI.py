@@ -5,6 +5,7 @@ import os
 import random
 import time
 import aiy.audio
+import main
 
 CLIENT_ID = "bPmtPn-lV_rFXuxrww2GOw=="
 CLIENT_KEY = "Vl56r8ewBSDhEdTfpFIWwuxhOqA01lF3aopxGH6aKOAEx9u8DMDpzsPFFed3M5-QaaiDGiMIlo-0p6Zk_1YfTQ=="
@@ -73,4 +74,4 @@ while True:
   if client.fill(samples): break
   
 client.finish()
-import main
+main.updateCard()
