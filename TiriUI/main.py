@@ -5,7 +5,8 @@ import time
 
 from datetime import datetime
 from tkinter import *
-from __main__ import finalResponse
+import TiriUI
+##from __main__ import finalResponse
 
 # Main
 
@@ -23,7 +24,7 @@ tiriResponse = PhotoImage(file = "TiriResponse.png")
 tiriCard = Label(root, image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER).pack(pady=(30,30))
 
 def updateCard():
-	tiriCard.configure(text = finalResponse)
+	tiriCard.configure(text = TiriUI.finalResponse)
 	tiriCard.after(1, updateCard)
 
 	
