@@ -39,10 +39,10 @@ class TiriListener(houndify.HoundListener):
       print("Final Response")
       if response["AllResults"][0]["CommandKind"] != "TimerCommand":
           aiy.audio.say(response["AllResults"][0]["SpokenResponseLong"])
-          finalResponse = response["AllResults"][0]["SpokenResponseLong"])
+          finalResponse = response["AllResults"][0]["SpokenResponseLong"]
       else:
           aiy.audio.say(response["AllResults"][0]["ClientActionSucceededResult"]["SpokenResponseLong"])
-          finalResponse = response["AllResults"][0]["ClientActionSucceededResult"]["SpokenResponseLong"])
+          finalResponse = response["AllResults"][0]["ClientActionSucceededResult"]["SpokenResponseLong"]
           setTimer(response["AllResults"][0]["NativeData"]["Timer"]["DurationInSeconds"])
       if response["AllResults"][0]["ConversationState"] != None:
           conversationStateFile = open("TiPodConversationState.txt","w")
