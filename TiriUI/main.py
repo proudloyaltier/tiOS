@@ -2,7 +2,7 @@
 
 import os
 import time
-from subprocess import call
+import subprocess
 from datetime import datetime
 from tkinter import *
 
@@ -76,7 +76,7 @@ realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack()
 
 def startTiri():
-        call(["arecord","-t", "raw", "-c",  "1",  "-r", "16000", "-f", "S16_LE", "|", "./TiriUI.py"])
+        subprocess.Popen("arecord -t raw -c 1 -r 16000 -f S16_LE | ./TiriUI.py", shell = True)
 
 startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, anchor="center", compound=CENTER, command = lambda: startTiri())
 startTiriButton.pack()
