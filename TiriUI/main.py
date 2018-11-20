@@ -25,6 +25,8 @@ tiriCard.pack(pady=(30,30))
 def openCard():
 	response = open("TiPodFinalResponse.txt", "r")
 	readResponseOpen = response.read()
+	if (len(readResponseOpen) > 144):
+		readResponseOpen = ' \n '.join(readResponseOpen[i:i+144] for i in range(0, len(readResponseOpen), 144))
 	response.close()
 	expanded_frame = Frame(root, bg = "white")
 	expanded_frame.pack()
