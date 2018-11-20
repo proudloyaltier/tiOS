@@ -72,13 +72,14 @@ def tick():
 tick()
 
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
+realtimeSpeaking.pack()
 
 def updateSpeaking():
 	if os.path.isfile('TiPodTranscription.txt'):
 		response = open("TiPodTranscription.txt", "r")
 		readResponseTrans = response.read()
 		response.close()
-		if (len(readResponse) > 50):
+		if (len(readResponseTrans) > 50):
 			realtimeSpeaking['text'] = readResponseTrans[0:47] + "..."
 		else:
 			realtimeSpeaking['text'] = readResponseTrans
