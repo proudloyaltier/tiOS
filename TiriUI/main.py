@@ -24,18 +24,18 @@ tiriCard.pack(pady=(30,30))
 
 def updateCard():
 	if os.path.isfile('TiPodFinalResponse.txt'):
-		response = open("TiPodFinalResponse.txt", "r")
-		tiriCard['text'] = response.read()
 		response = open("TiPodFinalResponse", "r")
 		readResponse = response.read()
 		response.close()
+		if (len(readResponse) > 18):
+                        tiriCard['text'] = readResponse[0:15] + "..."
+                else:
+                        tiriCard['text'] = readResponse
 	else:
-		tiriCard['text'] = "Hello! I'm Tiri and I'm ready to help"
+		tiriCard['text'] = "Hello! I'm Tiri!"
 	tiriCard.after(1, updateCard)
-	
+
 updateCard()
-
-
 	
 # Time Label
 
