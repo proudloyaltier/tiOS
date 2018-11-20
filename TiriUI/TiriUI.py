@@ -30,6 +30,9 @@ def setTimer(timeToStart):
     aiy.audio.say("Time is up.")
     print("Time is up")
     finalResponse = "Time is up"
+    finalResponseFile = open("TiPodFinalResponse.txt", "w")
+    finalResponseFile.write(finalResponse)
+    finalResponseFile.close()
     
 class TiriListener(houndify.HoundListener):
   def onPartialTranscript(self, transcript):
@@ -40,9 +43,15 @@ class TiriListener(houndify.HoundListener):
       if response["AllResults"][0]["CommandKind"] != "TimerCommand":
           aiy.audio.say(response["AllResults"][0]["SpokenResponseLong"])
           finalResponse = response["AllResults"][0]["SpokenResponseLong"]
+          finalResponseFile = open("TiPodFinalResponse.txt", "w")
+          finalResponseFile.write(finalResponse)
+          finalResponseFile.close()
       else:
           aiy.audio.say(response["AllResults"][0]["ClientActionSucceededResult"]["SpokenResponseLong"])
           finalResponse = response["AllResults"][0]["ClientActionSucceededResult"]["SpokenResponseLong"]
+          finalResponseFile = open("TiPodFinalResponse.txt", "w")
+          finalResponseFile.write(finalResponse)
+          finalResponseFile.close()
           setTimer(response["AllResults"][0]["NativeData"]["Timer"]["DurationInSeconds"])
       if response["AllResults"][0]["ConversationState"] != None:
           conversationStateFile = open("TiPodConversationState.txt","w")
