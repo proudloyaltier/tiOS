@@ -26,6 +26,8 @@ def updateCard():
 	if os.path.isfile('TiPodFinalResponse.txt'):
 		response = open("TiPodFinalResponse.txt", "r")
 		tiriCard['text'] = response.read()
+		response = open("TiPodFinalResponse", "r")
+		readResponse = response.read()
 		response.close()
 	else:
 		tiriCard['text'] = "Hello! I'm Tiri and I'm ready to help"
