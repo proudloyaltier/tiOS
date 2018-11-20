@@ -2,7 +2,7 @@
 
 import os
 import time
-
+from subprocess import call
 from datetime import datetime
 from tkinter import *
 
@@ -18,6 +18,7 @@ root.title = "TiOS"
 
 # Tiri Card
 button = PhotoImage(file = "Button.png")
+tiriMic = PhotoImage(file = "microphone.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
 tiriCard = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER, command = lambda: openCard())
 tiriCard.pack(pady=(30,30))
@@ -73,6 +74,12 @@ tick()
 
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack()
+
+def startTiri():
+        call(["arecord","-t", "raw", "-c",  "1",  "-r", "16000", "-f", "S16_LE", "|", "./TiriUI.py"])
+
+startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, anchor="center", compound=CENTER, command = lambda: startTiri())
+startTiriButton.pack()
 
 def updateSpeaking():
 	if os.path.isfile('TiPodTranscription.txt'):
