@@ -5,8 +5,6 @@ import time
 
 from datetime import datetime
 from tkinter import *
-import TiriUI
-##from __main__ import finalResponse
 
 # Main
 
@@ -21,11 +19,20 @@ root.title = "TiOS"
 # Tiri Card
 
 tiriResponse = PhotoImage(file = "TiriResponse.png")
-tiriCard = Label(root, image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER).pack(pady=(30,30))
+tiriCard = Label(root, image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER)
+tiriCard.pack(pady=(30,30))
 
 def updateCard():
-	tiriCard.configure(text = TiriUI.finalResponse)
+	if os.path.isfile('TiPodFinalResponse.txt'):
+		response = open("TiPodFinalResponse.txt", "r")
+		tiriCard['text'] = response.read()
+		response.close()
+	else:
+		tiriCard['text'] = "Hello! I'm Tiri and I'm ready to help"
 	tiriCard.after(1, updateCard)
+	
+updateCard()
+
 
 	
 # Time Label
