@@ -6,5 +6,7 @@ TiOS is the core operating system for Tiri Hub! TiOS uses TiDesign, our new desi
 
 ## Change Log
 
+Nov 16, 2018:
+  - Add new GUI code
 Nov 9, 2018:
   - Added Tkinter GUI Code
