@@ -52,7 +52,7 @@ def updateTiles():
 		i += 1
 # Updater
 
-update_request = urllib.request.urlopen("https://tiriai.github.io/TiOS/latest.html")
+update_request = urllib.request.urlopen("https://tiriai.github.io/TiOS/old/latest.html")
 latest_version = update_request.read().decode("utf-8").replace("\n", "")
 
 print("Checking for updates...")
@@ -60,7 +60,7 @@ print("Checking for updates...")
 if (version != latest_version):
 	print("Downloading latest version...")
 
-	download_request = urllib.request.urlopen("https://tiriai.github.io/TiOS/main.py")
+	download_request = urllib.request.urlopen("https://tiriai.github.io/TiOS/old/main.py")
 	downloaded_code = download_request.read().decode("utf-8")
 
 	main_file = open(__file__, "w")
