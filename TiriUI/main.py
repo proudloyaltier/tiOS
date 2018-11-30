@@ -11,7 +11,7 @@ from tkinter import *
 
 root = Tk()
 
-root.configure(background = "white")
+root.configure(background = "white", cursor = "none")
 root.attributes("-fullscreen", True)
 
 root.title = "TiOS"
