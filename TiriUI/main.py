@@ -20,6 +20,8 @@ root.title = "TiOS"
 button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
+startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, compound=CENTER, command = lambda: startTiri())
+startTiriButton.pack(anchor="w", side=TOP)
 tiriCard = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER, command = lambda: openCard())
 tiriCard.pack(pady=(30,30))
     
@@ -78,8 +80,6 @@ realtimeSpeaking.pack()
 def startTiri():
         subprocess.Popen("arecord -t raw -c 1 -r 16000 -f S16_LE | ./TiriUI.py", shell = True)
 
-startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, anchor="center", compound=CENTER, command = lambda: startTiri())
-startTiriButton.pack()
 
 def updateSpeaking():
 	if os.path.isfile('TiPodTranscription.txt'):
