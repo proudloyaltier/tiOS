@@ -13,15 +13,17 @@ root = Tk()
 
 root.configure(background = "white", cursor = "none")
 root.attributes("-fullscreen", True)
-
 root.title("TiOS")
 
 # Tiri Card
 button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
+shutdown = PhotoImage(file = "power.png")
 startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, compound=CENTER, command = lambda: startTiri())
 startTiriButton.pack(anchor="w", side=TOP)
+powerOffButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=shutdown, compound=CENTER, command = lambda: powerOff())
+powerOffButton.pack(anchor="w", side=TOP, pady=(10,10))
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack(anchor="center", side=TOP)
 tiriCard = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER, command = lambda: openCard())
@@ -78,6 +80,9 @@ tick()
 
 def startTiri():
         subprocess.Popen("arecord -t raw -c 1 -r 16000 -f S16_LE | ./TiriUI.py", shell = True)
+
+def powerOff():
+        subprocess.Popen("sudo shutdown now", shell = True)
 
 
 def updateSpeaking():
