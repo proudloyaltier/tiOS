@@ -20,12 +20,13 @@ root.title("TiOS")
 button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
+power = PhotoImage(file = "power.png")
 startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, compound=CENTER, command = lambda: startTiri())
 startTiriButton.pack(anchor="w", side=TOP)
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack(anchor="center", side=TOP)
 tiriCard = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER, command = lambda: openCard())
-tiriCard.pack(pady=(30,30))
+tiriCard.pack(pady=(0,0))
     
 def openCard():
 	response = open("TiPodFinalResponse.txt", "r")
@@ -68,7 +69,9 @@ updateCard()
 
 clock = Label(root, text = "?:??", font = "Roboto 54", bg = "white")
 
-clock.pack(pady = (25, 25))
+clock.pack(pady = (5, 5))
+powerOffButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
+powerOffButton.pack(anchor="center", pady = (5,5))
 
 def tick():
 	clock.configure(text = time.strftime("%H:%M:%S"))
@@ -78,6 +81,11 @@ tick()
 
 def startTiri():
         subprocess.Popen("arecord -t raw -c 1 -r 16000 -f S16_LE | ./TiriUI.py", shell = True)
+
+
+def powerOff():
+        subprocess.Popen("sudo shutdown now", shell = True)
+
 
 
 def updateSpeaking():
