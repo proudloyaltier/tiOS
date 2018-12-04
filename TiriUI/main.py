@@ -102,3 +102,7 @@ def updateSpeaking():
 	realtimeSpeaking.after(1, updateSpeaking)
 	
 updateSpeaking()
+
+
+if __name__ == '__main__':
+	root.mainloop()
