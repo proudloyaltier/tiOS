@@ -72,10 +72,10 @@ clock = Label(root, text = "?:??", font = "Roboto 54", bg = "white")
 
 clock.pack(pady = (5, 5))
 powerOffButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
-powerOffButton.pack(anchor="center", pady = (5,5))
+powerOffButton.pack(side=LEFT)
 
 wifiButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=wifi, compound=CENTER, command = lambda: resetWifi())
-wifiButton.pack(anchor="center", pady = (5,5))
+wifiButton.pack(side=RIGHT)
 
 
 def tick():
