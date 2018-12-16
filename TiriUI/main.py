@@ -21,6 +21,7 @@ button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
 power = PhotoImage(file = "power.png")
+wifi = PhotoImage(file = "wifiReset.png")
 startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, compound=CENTER, command = lambda: startTiri())
 startTiriButton.pack(anchor="w", side=TOP)
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
@@ -73,6 +74,10 @@ clock.pack(pady = (5, 5))
 powerOffButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
 powerOffButton.pack(anchor="center", pady = (5,5))
 
+wifiButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=wifi, compound=CENTER, command = lambda: resetWifi())
+wifiButton.pack(anchor="center", pady = (5,5))
+
+
 def tick():
 	clock.configure(text = time.strftime("%H:%M:%S"))
 	clock.after(1000, tick)
@@ -85,6 +90,10 @@ def startTiri():
 
 def powerOff():
         subprocess.Popen("sudo shutdown now", shell = True)
+
+
+def resetWifi():
+        subprocess.Popen("sudo python3 /usr/lib/raspiwifi/reset_device/manual_reset.py", shell = True)
 
 
 
