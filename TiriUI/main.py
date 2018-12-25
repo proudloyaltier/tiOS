@@ -19,7 +19,6 @@ root.title("TiOS")
 # Tiri Card
 button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
-tiriMicSpeaking = PhotoImage(file = "microphoneActivated.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
 power = PhotoImage(file = "power.png")
 wifi = PhotoImage(file = "wifiReset.png")
@@ -75,9 +74,16 @@ clock.pack(pady = (5, 5))
 powerOffButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
 powerOffButton.pack(side=LEFT)
 
+listeningLabel = Label(root, compound=CENTER, text = "Listening...", font = "Roboto 24", bg = "white")
+
 wifiButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=wifi, compound=CENTER, command = lambda: resetWifi())
 wifiButton.pack(side=RIGHT)
 
+def listening():
+	listeningLabel.pack(side=LEFT)
+	
+def hideListening():
+	listeningLabel.pack_forget()
 
 def tick():
 	clock.configure(text = time.strftime("%H:%M:%S"))
@@ -86,6 +92,7 @@ def tick():
 tick()
 
 def startTiri():
+	listening()
 	subprocess.Popen("arecord -t raw -c 1 -r 16000 -f S16_LE | ./TiriUI.py", shell = True)
 
 
@@ -103,16 +110,15 @@ def updateSpeaking():
 		response = open("TiPodTranscription.txt", "r")
 		readResponseTrans = response.read()
 		response.close()
-		startTiriButton.configure(image = tiriMicSpeaking)
-		startTiriButton.image = tiriMicSpeaking
+		if readResponseTrans == "":
+			hideListening()
+		
 		if (len(readResponseTrans) > 50):
 			realtimeSpeaking['text'] = readResponseTrans[0:47] + "..."
 		else:
 			realtimeSpeaking['text'] = readResponseTrans
 	else:
-		
-		startTiriButton.configure(image = tiriMic)
-		startTiriButton.image = tiriMic
+		hideListening()
 		realtimeSpeaking['text'] = ""
 	realtimeSpeaking.after(1, updateSpeaking)
 	
