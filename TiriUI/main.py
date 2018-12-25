@@ -19,6 +19,7 @@ root.title("TiOS")
 # Tiri Card
 button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
+tiriMicSpeaking = PhotoImage(file = "microphoneActivated.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
 power = PhotoImage(file = "power.png")
 wifi = PhotoImage(file = "wifiReset.png")
@@ -85,15 +86,15 @@ def tick():
 tick()
 
 def startTiri():
-        subprocess.Popen("arecord -t raw -c 1 -r 16000 -f S16_LE | ./TiriUI.py", shell = True)
+	subprocess.Popen("arecord -t raw -c 1 -r 16000 -f S16_LE | ./TiriUI.py", shell = True)
 
 
 def powerOff():
-        subprocess.Popen("sudo shutdown now", shell = True)
+	subprocess.Popen("sudo shutdown now", shell = True)
 
 
 def resetWifi():
-        subprocess.Popen("sudo python3 /usr/lib/raspiwifi/reset_device/manual_reset.py", shell = True)
+	subprocess.Popen("sudo python3 /usr/lib/raspiwifi/reset_device/manual_reset.py", shell = True)
 
 
 
@@ -102,11 +103,16 @@ def updateSpeaking():
 		response = open("TiPodTranscription.txt", "r")
 		readResponseTrans = response.read()
 		response.close()
+		startTiriButton.configure(image = tiriMicSpeaking)
+		startTiriButton.image = tiriMicSpeaking
 		if (len(readResponseTrans) > 50):
 			realtimeSpeaking['text'] = readResponseTrans[0:47] + "..."
 		else:
 			realtimeSpeaking['text'] = readResponseTrans
 	else:
+		
+		startTiriButton.configure(image = tiriMic)
+		startTiriButton.image = tiriMic
 		realtimeSpeaking['text'] = ""
 	realtimeSpeaking.after(1, updateSpeaking)
 	
