@@ -33,5 +33,7 @@ if [ -d /etc/profile.d ]; then
   unset i
 fi
 
+cd /home/pi/
+sudo sh updater.sh
 cd /home/pi/TiOS
 sudo python3 main.py &
