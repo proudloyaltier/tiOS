@@ -8,12 +8,9 @@ from tkinter import *
 
 # Main
 
-
 root = Tk()
-
 root.configure(background = "white", cursor = "none")
 root.attributes("-fullscreen", True)
-
 root.title("TiOS")
 
 # Tiri Card
