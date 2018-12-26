@@ -6,7 +6,7 @@ import subprocess
 from datetime import datetime
 from tkinter import *
 
-# Main
+# Tkinter Window Configuration
 
 root = Tk()
 root.configure(background = "white", cursor = "none")
