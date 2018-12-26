@@ -4,6 +4,7 @@ import sys
 import os
 import random
 import time
+import geocoder
 import aiy.audio
 
 CLIENT_ID = "bPmtPn-lV_rFXuxrww2GOw=="
@@ -73,7 +74,8 @@ class TiriListener(houndify.HoundListener):
 
 client = houndify.StreamingHoundClient(CLIENT_ID, CLIENT_KEY, str(AUTHVAL))
 
-client.setLocation(37.388309, -121.973968)
+geolocation = geocoder.ip('me')
+client.setLocation(geolocation.latlng[0], geolocation.latlng[1])
 
 if os.path.isfile('TiPodConversationState.txt'):
     conversationStateFile = open("TiPodConversationState.txt","r")
