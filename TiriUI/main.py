@@ -66,7 +66,7 @@ def updateCard():
 		response = open("TiPodFinalResponse.txt", "r")
 		readResponse = response.read()
 		response.close()
-		if (len(readResponse) > 10):
+		if (len(readResponse) > 8):
 			tiriCard['text'] = readResponse[0:15] + "..."
 		else:
 			tiriCard['text'] = readResponse
