@@ -18,15 +18,27 @@ button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
 tiriMicSpeaking = PhotoImage(file = "microphoneActivated.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
+tiriResponsePowerHelp = PhotoImage(file = "PowerHelp.png")
+tiriResponseWifiHelp = PhotoImage(file = "WifiHelp.png")
+tiriResponseHelp = PhotoImage(file = "StartTiri.png")
 power = PhotoImage(file = "power.png")
 wifi = PhotoImage(file = "wifiReset.png")
 startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, compound=CENTER, command = lambda: startTiri())
 startTiriButton.pack(anchor="w", side=TOP)
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack(anchor="center", side=TOP)
-tiriCard = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER, command = lambda: openCard())
-tiriCard.pack(pady=(0,0))
-    
+cardFrame = Frame(root)
+tiriCardPowerHelp = Label(cardFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponsePowerHelp, font = "Roboto 24", anchor="center", compound=CENTER)
+tiriCardPowerHelp.pack(side=LEFT)
+tiriCardHelp = Label(cardFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponseHelp, font = "Roboto 24", anchor="center", compound=CENTER)
+tiriCardHelp.pack(side=LEFT)
+tiriCard = Button(cardFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER, command = lambda: openCard())
+tiriCard.pack(side=LEFT)
+tiriCardWifiHelp = Label(cardFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponseWifiHelp, font = "Roboto 24", anchor="center", compound=CENTER)
+tiriCardWifiHelp.pack(side=LEFT)
+cardFrame.pack()
+
+
 def openCard():
 	response = open("TiPodFinalResponse.txt", "r")
 	readResponseOpen = response.read()
@@ -54,7 +66,7 @@ def updateCard():
 		response = open("TiPodFinalResponse.txt", "r")
 		readResponse = response.read()
 		response.close()
-		if (len(readResponse) > 18):
+		if (len(readResponse) > 10):
 			tiriCard['text'] = readResponse[0:15] + "..."
 		else:
 			tiriCard['text'] = readResponse
