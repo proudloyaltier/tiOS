@@ -66,7 +66,7 @@ def closeCard(frame, title, text, button):
 	
 # Time Label
 
-clockFrame = Frame(root)
+clockFrame = Frame(root, bg="white")
 powerOffButton = Button(clockFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
 powerOffButton.pack(side=LEFT)
 
