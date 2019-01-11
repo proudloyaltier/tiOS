@@ -28,6 +28,7 @@ startTiriButton.pack(anchor="w", side=TOP)
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack(anchor="center", side=TOP)
 cardFrame = Frame(root)
+
 # Tiri Card
 def loadTiles():
 	for widget in cardFrame.winfo_children():
@@ -65,14 +66,15 @@ def closeCard(frame, title, text, button):
 	
 # Time Label
 
-clock = Label(root, text = "?:??", font = "Roboto 54", bg = "white")
-
-powerOffButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
+clockFrame = Frame(root)
+powerOffButton = Button(clockFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
 powerOffButton.pack(side=LEFT)
-clock.pack(pady = (5, 5))
 
-wifiButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=wifi, compound=CENTER, command = lambda: resetWifi())
+wifiButton = Button(clockFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=wifi, compound=CENTER, command = lambda: resetWifi())
 wifiButton.pack(side=RIGHT)
+clock = Label(clockFrame, text = "?:??", font = "Roboto 54", bg = "white")
+clock.pack(pady = (5, 5))
+clockFrame.pack()
 
 def tick():
 	clock.configure(text = time.strftime("%H:%M:%S"))
