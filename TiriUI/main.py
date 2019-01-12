@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+#X Icon:  Tiwtter, Chris McKenna [CC BY 4.0 (https://creativecommons.org/licenses/by/4.0)]
+#Microphone Icon: Houndify Brand Attribution
+#Wifi Reset Icon: IconArchive
+
 import os
 import time
 import subprocess
@@ -10,7 +14,7 @@ from tkinter import *
 
 tiles = []
 root = Tk()
-root.configure(background = "white", cursor = "none")
+root.configure(background = "white")##, cursor = "none")
 root.attributes("-fullscreen", True)
 root.title("TiOS")
 
@@ -18,9 +22,7 @@ button = PhotoImage(file = "Button.png")
 tiriMic = PhotoImage(file = "microphone.png")
 tiriMicSpeaking = PhotoImage(file = "microphoneActivated.png")
 tiriResponse = PhotoImage(file = "TiriResponse.png")
-tiriResponsePowerHelp = PhotoImage(file = "PowerHelp.png")
-tiriResponseWifiHelp = PhotoImage(file = "WifiHelp.png")
-tiriResponseHelp = PhotoImage(file = "StartTiri.png")
+xIcon = PhotoImage(file = "x.png")
 power = PhotoImage(file = "power.png")
 wifi = PhotoImage(file = "wifiReset.png")
 startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriMic, compound=CENTER, command = lambda: startTiri())
@@ -49,19 +51,27 @@ def loadTiles():
 def openCard(i):
 	expanded_frame = Frame(root, bg = "white")
 	expanded_frame.pack()
-	tile_title = Label(expanded_frame, text = "Tiri Response", font = "Roboto 24", bg = "white")
-	tile_text = Label(expanded_frame, text = tiles[i], font = "Roboto 14", bg = "white")
-	tile_button = Button(expanded_frame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, text = "Back", font = "Roboto 24", bg = "white", image=button, anchor="center", compound=CENTER, command = lambda: closeCard(expanded_frame, tile_title, tile_text, tile_button))
+	tile_title = Label(expanded_frame, text = "Tiri Response", font = "Roboto 34", bg = "white")
+	tile_button_remove = Button(expanded_frame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, font = "Roboto 24", bg = "white", image=xIcon, anchor="center", compound=CENTER, command = lambda: deleteCard(i, expanded_frame, tile_title, tile_text, tile_button, tile_button_remove))
+	tile_text = Label(expanded_frame, wraplength=500, justify=LEFT, text = tiles[i], font = "Roboto 20", bg = "white")
+	tile_button = Button(expanded_frame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, text = "Back", font = "Roboto 24", bg = "white", image=button, anchor="center", compound=CENTER, command = lambda: closeCard(expanded_frame, tile_title, tile_text, tile_button, tile_button_remove))
 	expanded_frame.place(x = 0, y = 0, relwidth = 1, relheight = 1)
-	tile_title.grid(padx = (25, 25), pady = (25, 25))
+	tile_title.grid(padx = (25, 25))
+	tile_button_remove.grid()
 	tile_text.grid(padx = (25, 25))
 	tile_button.grid()
+
+def deleteCard(i, frame, title, text, button, remove):
+	del tiles[i]
+	closeCard(frame, title, text, button, remove)
+	loadTiles()
 	
-def closeCard(frame, title, text, button):
+def closeCard(frame, title, text, button, remove):
 	frame.destroy()
 	title.destroy()
 	text.destroy()
 	button.destroy()
+	remove.destroy()
 	
 	
 # Time Label
