@@ -14,7 +14,7 @@ from tkinter import *
 
 tiles = []
 root = Tk()
-root.configure(background = "white")##, cursor = "none")
+root.configure(background = "white", cursor = "none")
 root.attributes("-fullscreen", True)
 root.title("TiOS")
 
@@ -29,7 +29,7 @@ startTiriButton = Button(root, relief="flat", highlightthickness=0, activebackgr
 startTiriButton.pack(anchor="w", side=TOP)
 realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack(anchor="center", side=TOP)
-cardFrame = Frame(root)
+cardFrame = Frame(root, bg="white")
 
 # Tiri Card
 def loadTiles():
