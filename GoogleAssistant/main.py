@@ -26,7 +26,7 @@ realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
 realtimeSpeaking.pack(anchor="center", side=TOP)
 cardFrame = Frame(root, bg="white")
 
-# Tiri Card
+# Response Card
 def loadTiles():
 	for widget in cardFrame.winfo_children():
 	    widget.destroy()
@@ -46,7 +46,7 @@ def loadTiles():
 def openCard(i):
 	expanded_frame = Frame(root, bg = "white")
 	expanded_frame.pack()
-	tile_title = Label(expanded_frame, text = "Tiri Response", font = "Roboto 34", bg = "white")
+	tile_title = Label(expanded_frame, text = "Response", font = "Roboto 34", bg = "white")
 	tile_button_remove = Button(expanded_frame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, font = "Roboto 24", bg = "white", image=xIcon, anchor="center", compound=CENTER, command = lambda: deleteCard(i, expanded_frame, tile_title, tile_text, tile_button, tile_button_remove))
 	tile_text = Label(expanded_frame, wraplength=500, justify=LEFT, text = tiles[i], font = "Roboto 20", bg = "white")
 	tile_button = Button(expanded_frame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, text = "Back", font = "Roboto 24", bg = "white", image=button, anchor="center", compound=CENTER, command = lambda: closeCard(expanded_frame, tile_title, tile_text, tile_button, tile_button_remove))
