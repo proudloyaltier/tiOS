@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+
+#X Icon:  Tiwtter, Chris McKenna [CC BY 4.0 (https://creativecommons.org/licenses/by/4.0)]
+#Wifi Reset Icon: IconArchive
+
+import os
+import time
+import subprocess
+from datetime import datetime
+from tkinter import *
+
+# Tkinter Window Configuration
+
+tiles = []
+root = Tk()
+root.configure(background = "white", cursor = "none")
+root.attributes("-fullscreen", True)
+root.title("TiOS")
+
+button = PhotoImage(file = "Button.png")
+tiriResponse = PhotoImage(file = "TiriResponse.png")
+xIcon = PhotoImage(file = "x.png")
+power = PhotoImage(file = "power.png")
+wifi = PhotoImage(file = "wifiReset.png")
+realtimeSpeaking = Label(root, text = "", font = "Roboto 24", bg = "white")
+realtimeSpeaking.pack(anchor="center", side=TOP)
+cardFrame = Frame(root, bg="white")
+
+# Tiri Card
+def loadTiles():
+	for widget in cardFrame.winfo_children():
+	    widget.destroy()
+	if len(tiles) >= 4:
+		lengthOfFor = 4
+	else:
+		lengthOfFor = len(tiles)
+	for i in range(0, lengthOfFor):
+		tiriCard = Button(cardFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=tiriResponse, font = "Roboto 24", anchor="center", text="Hi! I'm Tiri!", compound=CENTER, command = lambda x=i: openCard(x))
+		tiriCard.pack(side=LEFT)
+		if (len(tiles[i]) > 5):
+			tiriCard['text'] = tiles[i][0:5] + "..."
+		else:
+			tiriCard['text'] = tiles[i]
+	cardFrame.pack()
+	
+def openCard(i):
+	expanded_frame = Frame(root, bg = "white")
+	expanded_frame.pack()
+	tile_title = Label(expanded_frame, text = "Tiri Response", font = "Roboto 34", bg = "white")
+	tile_button_remove = Button(expanded_frame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, font = "Roboto 24", bg = "white", image=xIcon, anchor="center", compound=CENTER, command = lambda: deleteCard(i, expanded_frame, tile_title, tile_text, tile_button, tile_button_remove))
+	tile_text = Label(expanded_frame, wraplength=500, justify=LEFT, text = tiles[i], font = "Roboto 20", bg = "white")
+	tile_button = Button(expanded_frame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, text = "Back", font = "Roboto 24", bg = "white", image=button, anchor="center", compound=CENTER, command = lambda: closeCard(expanded_frame, tile_title, tile_text, tile_button, tile_button_remove))
+	expanded_frame.place(x = 0, y = 0, relwidth = 1, relheight = 1)
+	tile_title.grid(padx = (25, 25))
+	tile_button_remove.grid()
+	tile_text.grid(padx = (25, 25))
+	tile_button.grid()
+
+def deleteCard(i, frame, title, text, button, remove):
+	del tiles[i]
+	closeCard(frame, title, text, button, remove)
+	loadTiles()
+	
+def closeCard(frame, title, text, button, remove):
+	frame.destroy()
+	title.destroy()
+	text.destroy()
+	button.destroy()
+	remove.destroy()
+	
+	
+# Time Label
+
+clockFrame = Frame(root, bg="white")
+powerOffButton = Button(clockFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=power, compound=CENTER, command = lambda: powerOff())
+powerOffButton.pack(side=LEFT)
+
+wifiButton = Button(clockFrame, relief="flat", highlightthickness=0, activebackground="white", borderwidth=0, bg = "white", image=wifi, compound=CENTER, command = lambda: resetWifi())
+wifiButton.pack(side=RIGHT)
+clock = Label(clockFrame, text = "?:??", font = "Roboto 54", bg = "white")
+clock.pack(pady = (5, 5))
+clockFrame.pack()
+
+def tick():
+	clock.configure(text = time.strftime("%H:%M:%S"))
+	clock.after(1000, tick)
+
+tick()
+
+def powerOff():
+	subprocess.Popen("sudo shutdown now", shell = True)
+
+
+def resetWifi():
+	subprocess.Popen("sudo python3 /usr/lib/raspiwifi/reset_device/manual_reset.py", shell = True)
+
+
+
+def updateSpeaking():
+	if os.path.isfile('TiPodTranscription.txt'):
+		response = open("TiPodTranscription.txt", "r")
+		readResponseTrans = response.read()
+		response.close()
+		if (len(readResponseTrans) > 50):
+			realtimeSpeaking['text'] = readResponseTrans[0:47] + "..."
+		else:
+			realtimeSpeaking['text'] = readResponseTrans
+	else:
+		realtimeSpeaking['text'] = ""
+	realtimeSpeaking.after(1, updateSpeaking)
+	
+updateSpeaking()
+
+def updateCard():
+	if os.path.isfile('TiPodFinalResponse.txt'):
+		response = open("TiPodFinalResponse.txt", "r")
+		readResponse = response.read()
+		response.close()
+		if len(readResponse) > 1:
+			tiles.append(readResponse)
+			response = open("TiPodFinalResponse.txt", "w")
+			response.write("")
+			response.close()
+			cardFrame.pack_forget()
+			loadTiles()
+	realtimeSpeaking.after(1, updateCard)
+
+updateCard()
+
+if __name__ == '__main__':
+	root.mainloop()
