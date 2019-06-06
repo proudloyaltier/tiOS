@@ -2,7 +2,7 @@
 
 ## What's tiOS?
 
-tiOS is the operating system for timedia Display! TiOS uses TiDesign, our new design language (including tiOS UI and timedia Web UI).
+tiOS is the operating system for timedia Display! tiOS uses tidesign, our new design language (including tiOS UI and timedia Web UI).
 
 ## Change Log
 
